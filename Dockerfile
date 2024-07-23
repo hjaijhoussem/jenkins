@@ -1,3 +1,4 @@
+#Mutli stage Dockerfile
 FROM node:latest as build
 WORKDIR /app
 COPY package*.json ./app
