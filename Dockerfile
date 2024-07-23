@@ -1,5 +1,5 @@
 FROM node:latest as build
-
+# defining default workdir
 WORKDIR /app
 
 COPY package*.json ./app
