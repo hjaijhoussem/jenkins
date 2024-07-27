@@ -3,16 +3,25 @@ pipeline{
     agent any
 
     environment{
-        NAME= "hjaiej"
+        NAME= 'hjaiej'
+        IMAGE_NAME= 'react-app'
+        GITHUB_URL= 'https://github.com/hjaijhoussem/jenkins.git'
+        BRANCH= 'main'
+        GH_TOKEN= 'gh_token'
     }
 
     stages {
-        stage("print_name"){
+        stage("checkout code"){
             steps {
-                script{
-                    sh 'echo "$NAME"'
-                } 
+                git url: "${GITHUB_URL}", branch: "${BRANCH}", credentialsId: "${GH_TOKEN}"
+            }
+        }
+
+        stage("build image"){
+            steps{
+                docker.build("${IMAGE_NAME}:${env.BUILD_NUMBER}", '../Dockerfile')
             }
         }
     }
+
 }
