@@ -10,7 +10,7 @@ pipeline{
         stage("print_name"){
             steps {
                 script{
-                    sh 'echo $NAME'
+                    sh 'echo "$NAME"'
                 } 
             }
         }
