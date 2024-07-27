@@ -3,7 +3,7 @@ FROM node:latest as build
 WORKDIR /app
 COPY package*.json ./app
 RUN npm install
-copy . .
+COPY . .
 RUN npm run build
 
 FROM nginx:latest
