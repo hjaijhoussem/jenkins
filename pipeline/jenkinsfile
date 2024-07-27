@@ -14,7 +14,7 @@ pipeline {
                 script {
                     checkout scmGit(
                         branches: [[name: "${BRANCH}"]],
-                        userRemoteConfigs: [[credentialsId: 'gh-token',url: "${GITHUB_URL}"]]
+                        userRemoteConfigs: [[credentialsId: 'gh_creds',url: "${GITHUB_URL}"]]
                     )
                 }
             }
