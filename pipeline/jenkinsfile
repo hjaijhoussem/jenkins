@@ -1,19 +1,22 @@
-pipeline{
-
+pipeline {
     agent any
 
-    environment{
+    environment {
         NAME= 'hjaiej'
         IMAGE_NAME= 'react-app'
+        // Avoid storing the token directly in the environment variable. Consider using Jenkins Credentials plugin.
         GITHUB_URL= 'https://github.com/hjaijhoussem/jenkins.git'
         BRANCH= 'main'
-        GH_TOKEN= 'gh_token'
     }
 
     stages {
         stage("checkout code"){
             steps {
-                git url: "${GITHUB_URL}", branch: "${BRANCH}", credentialsId: "${GH_TOKEN}"
+                script {
+                    // Use credentials plugin to retrieve the token securely
+                    def token = credentialsId('GH_TOKEN')
+                    git url: "${GITHUB_URL}", branch: "${BRANCH}", credentialsId: token
+                }
             }
         }
 
@@ -23,5 +26,4 @@ pipeline{
             }
         }
     }
-
 }
