@@ -4,7 +4,6 @@ pipeline {
     environment {
         NAME= 'hjaiej'
         IMAGE_NAME= 'react-app'
-        // Avoid storing the token directly in the environment variable. Consider using Jenkins Credentials plugin.
         GITHUB_URL= 'https://github.com/hjaijhoussem/jenkins.git'
         BRANCH= 'main'
     }
@@ -13,9 +12,10 @@ pipeline {
         stage("checkout code"){
             steps {
                 script {
-                    // Use credentials plugin to retrieve the token securely
-                    def token = credentialsId('GH_TOKEN')
-                    git url: "${GITHUB_URL}", branch: "${BRANCH}", credentialsId: token
+                    checkout scmGit(
+                        branches: [[name: "${BRANCH}"]],
+                        userRemoteConfigs: [[credentialsId: 'gh-token',url: "${GITHUB_URL}"]]
+                    )
                 }
             }
         }
