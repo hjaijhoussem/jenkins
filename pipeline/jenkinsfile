@@ -27,7 +27,7 @@ pipeline {
         stage("build image"){
             steps{
                 script{
-                    docker.build("${IMAGE_NAME}:${env.BUILD_NUMBER}", 'jenkins/Dockerfile')
+                    docker.build("${IMAGE_NAME}:${env.BUILD_NUMBER}", 'Dockerfile')
                 }
             }
         }
