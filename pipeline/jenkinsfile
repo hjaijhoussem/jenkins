@@ -9,7 +9,7 @@ pipeline {
         stage("checkout code"){
             steps {
                 script {
-                    git url: 'https://github.com/hjaijhoussem/jenkins.git', branch: 'main'
+                    git url: 'https://github.com/hjaijhoussem/jenkins.git', branch: 'main', credentialsId: 'gh-creds'
                 }
             }
         }
