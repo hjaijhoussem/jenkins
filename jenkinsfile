@@ -9,7 +9,6 @@ pipeline {
         stage("checkout code"){
             steps {
                 script {
-                    // checkout([$class: 'GitSCM',branches: [[name: '*/main']],doGenerateSubmoduleConfigurations: false,extensions: [],submoduleCfg: [],userRemoteConfigs: [[url: 'https://github.com/hjaijhoussem/jenkins.git',credentialsId: 'gh_usr_pwd']]])
                     git branch: 'main', url: 'https://github.com/hjaijhoussem/jenkins.git',  credentialsId: 'gh_usr_pwd'
                 }
             }
