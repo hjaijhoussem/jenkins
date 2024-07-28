@@ -24,6 +24,19 @@ pipeline {
             }
         }
 
+        stage('Check Checkout Status') {
+            steps {
+                script {
+                    def buildResult = currentBuild.result
+                    if (buildResult == 'SUCCESS') {
+                        echo 'Checkout successful'
+                    } else {
+                        error 'Checkout failed'
+                    }
+                }
+            }
+        }
+
         stage("build image"){
             steps{
                 script{
