@@ -10,12 +10,7 @@ pipeline {
             steps {
                 script {
                     // checkout([$class: 'GitSCM',branches: [[name: '*/main']],doGenerateSubmoduleConfigurations: false,extensions: [],submoduleCfg: [],userRemoteConfigs: [[url: 'https://github.com/hjaijhoussem/jenkins.git',credentialsId: 'gh_usr_pwd']]])
-                    try {
-                        git url: 'https://github.com/hjaijhoussem/jenkins.git', branch: 'main', credentialsId: 'gh_usr_pwd'
-                    } catch (err) {
-                        echo "Checkout failed: ${err}"
-                        error "Checkout failed"
-                    }
+                    git branch: 'main', url: 'https://github.com/hjaijhoussem/jenkins.git',  credentialsId: 'gh_usr_pwd'
                 }
             }
         }
@@ -25,7 +20,7 @@ pipeline {
         stage("build image"){
             steps{
                 script{
-                    docker.build("${IMAGE_NAME}:${env.BUILD_NUMBER}", 'jenkins/Dockerfile')
+                    docker.build("${IMAGE_NAME}:${env.BUILD_NUMBER}", './Dockerfile')
                 }
             }
         }
