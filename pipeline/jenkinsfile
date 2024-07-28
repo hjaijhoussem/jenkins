@@ -17,7 +17,7 @@ pipeline {
                         submoduleCfg: [],
                         userRemoteConfigs: [[
                             url: 'https://github.com/hjaijhoussem/jenkins.git',
-                            credentialsId: 'gh-creds'
+                            credentialsId: 'gh_usr_pwd'
                         ]]
                     ])
                 }
