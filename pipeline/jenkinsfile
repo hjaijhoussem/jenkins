@@ -9,8 +9,7 @@ pipeline {
         stage("checkout code"){
             steps {
                 script {
-                    timeout(time: 10, unit: 'MINUTES') {
-                        checkout([
+                    checkout([
                         $class: 'GitSCM',
                         branches: [[name: '*/main']],
                         doGenerateSubmoduleConfigurations: false,
@@ -21,7 +20,6 @@ pipeline {
                             credentialsId: 'gh_usr_pwd'
                         ]]
                     ])
-                    }
                 }
             }
         }
