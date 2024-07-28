@@ -2,20 +2,14 @@ pipeline {
     agent any
 
     environment {
-        NAME= 'hjaiej'
         IMAGE_NAME= 'react-app'
-        GITHUB_URL= 'https://github.com/hjaijhoussem/jenkins.git'
-        BRANCH= 'main'
     }
 
     stages {
         stage("checkout code"){
             steps {
                 script {
-                    checkout scmGit(
-                        branches: [[name: "${BRANCH}"]],
-                        userRemoteConfigs: [[credentialsId: 'gh_creds',url: "${GITHUB_URL}"]]
-                    )
+                    git url: 'https://github.com/hjaijhoussem/jenkins.git', branch: 'main'
                 }
             }
         }
