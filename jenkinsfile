@@ -23,5 +23,13 @@ pipeline {
                 }
             }
         }
+
+        stage("Trivy scanning"){
+            steps{
+                script{
+                    sh 'trivy "${IMAGE_NAME}:${env.BUILD_NUMBER}"' 
+                }
+            }
+        }
     }
 }
