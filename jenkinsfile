@@ -23,7 +23,8 @@ pipeline {
         stage("Trivy scanning"){
             steps{
                 script{
-                    sh 'trivy image ${IMAGE_NAME}:${env.BUILD_NUMBER}' 
+                    def trivyOutput = sh(script: "trivy image $IMAGE_NAME:BUILD_NUMBER", returnStdout: true).trim()
+                    println trivyOutput 
                 }
             }
         }
