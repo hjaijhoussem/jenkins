@@ -20,14 +20,18 @@ pipeline {
                 }
             }
         }
-        stage("Trivy scanning"){
+        stage('scan'){
             steps{
-                script{
-                    // def trivyOutput = sh(script: "trivy image $IMAGE_NAME:$env.BUILD_NUMBER", returnStdout: true).trim()
-                    // println trivyOutput 
-                    sh 'trivy image "${IMAGE_NAME}:${env.BUILD_NUMBER}"'
+                withSonarQubeEnv(installationName: 'sonarqube') {
+                    sh './mvnw clear org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0:sonar'
                 }
             }
         }
+        stage('Quality Gate'){
+            steps{
+                waitForQualityGate abortPipeline: true
+            }
+        }
+        
     }
 }
