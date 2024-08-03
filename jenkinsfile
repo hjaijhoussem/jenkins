@@ -42,5 +42,23 @@ pipeline {
                 }
             }
         }
+
+        stage("push to nexus"){
+            environment {
+                NEXUS_VERSION = "nexus3"
+                NEXUS_PROTOCOL = "http"
+                NEXUS_URL = "http://192.168.1.121:8081/"
+                NEXUS_REPOSITORY = "react-repo" 
+                NEXUS_CREDENTIAL_ID = "jn_nexus_creds"
+            }
+            steps{
+                script{
+                    withDockerRegistry([url: "${NEXUS_URL}", credentialsId: "${NEXUS_CREDENTIAL_ID}"]) {
+                        docker.image("${IMAGE_NAME}:${env.BUILD_NUMBER}").push('latest')
+                        docker.image("${IMAGE_NAME}:${env.BUILD_NUMBER}").push("${env.BUILD_NUMBER}")
+                    }
+                } 
+            }
+        }
     }
 }
