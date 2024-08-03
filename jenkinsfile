@@ -24,7 +24,7 @@ pipeline {
                          -Dsonar.projectKey=react-app \
                          -Dsonar.projectName="React App" \
                          -Dsonar.sources=. \
-                         -Dsonar.host.url=http://192.168.1.121:9000
+                         -Dsonar.host.url=http://192.168.1.121:9000"
                 }
             }
         }
