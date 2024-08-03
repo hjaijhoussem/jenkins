@@ -26,7 +26,8 @@ pipeline {
         stage('scan'){
             steps{
                 withSonarQubeEnv(installationName: 'sonarqube') {
-                    sh './mvnw clear org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0:sonar'
+                    // sh './mvnw clear org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0:sonar'
+                    sh "mvn clean verify sonar:sonar -Dsonar.projectKey=react-app -Dsonar.projectName='react app' -Dsonar.host.url=http://192.168.1.121:9000"
                 }
             }
         }
